@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import yeonjiAvatar from "../../public/yeonji-avatar.jpg";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -45,7 +46,7 @@ export default function Home() {
             <div className="absolute -inset-1 bg-gradient-to-tr from-purple-500 via-pink-400 to-indigo-500 rounded-full blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-white dark:ring-zinc-900 shadow-lg bg-purple-100 dark:bg-zinc-800">
               <Image
-                src="/yeonji-avatar.jpg"
+                src={yeonjiAvatar}
                 alt="이연지 프로필"
                 fill
                 sizes="(max-width: 640px) 96px, 112px"

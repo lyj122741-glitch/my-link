@@ -7,6 +7,11 @@ type WebpackRule = {
 };
 
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath: process.env.NODE_ENV === "production" ? "/my-link" : "",
+  images: {
+    unoptimized: true,
+  },
   webpack: (config) => {
     config.module?.rules?.forEach((rule: unknown) => {
       const r = rule as WebpackRule;
