@@ -1,16 +1,28 @@
 import type { NextConfig } from "next";
 
+type WebpackRule = {
+  test?: { toString(): string };
+  oneOf?: WebpackRule[];
+  use?: unknown[];
+};
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
+  webpack: (config) => {
+    config.module?.rules?.forEach((rule: unknown) => {
+      const r = rule as WebpackRule;
+      if (r && r.oneOf) {
+        r.oneOf.forEach((oneOfRule) => {
+          if (oneOfRule?.test && oneOfRule.test.toString().includes("css")) {
+            if (Array.isArray(oneOfRule.use)) {
+              oneOfRule.use.push({
+                loader: "@tailwindcss/turbopack",
+              });
+            }
+          }
+        });
+      }
+    });
+    return config;
   },
 };
 
