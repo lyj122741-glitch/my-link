@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
+    "deploy": "npm run build && cd out && touch .nojekyll && git init && git branch -M gh-pages && git add -A && git commit -m 'Deploy to GitHub Pages' && git remote add origin https://github.com/lyj122741-glitch/my-link.git && git push -u origin gh-pages --force && rm -rf .git",
     "start": "next start",
     "lint": "eslint"
   },
